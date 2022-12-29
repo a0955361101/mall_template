@@ -1,0 +1,26 @@
+@import './base.css';
+
+
+.rwd(@point,@content,@num:null) {
+    & when (@point = pc) {
+        @media only screen and (max-width: 1200px) {
+            @content();
+        }
+    }
+    & when (@point = pad) {
+        @media only screen and (max-width: 992px) {
+            @content();
+        }
+    }
+    & when (@point = mobile) {
+        @media only screen and (max-width: 768px) {
+            @content();
+        }
+    }
+    & when (@point = custom) {
+        @media only screen and (max-width: @num) {
+            @content();
+        }
+    }
+}
+
