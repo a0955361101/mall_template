@@ -10,6 +10,34 @@ import "swiper/css/navigation";
 
 const modules = [Autoplay, Pagination, Navigation];
 
+const swiperImgs = ref([
+  { id: 0, src: 'https://picsum.photos/id/242/1920/500' },
+  { id: 1, src: 'https://picsum.photos/id/238/1920/500' },
+  { id: 2, src: 'https://picsum.photos/id/249/1920/500' },
+  { id: 3, src: 'https://picsum.photos/id/250/1920/500' },
+  { id: 4, src: 'https://picsum.photos/id/252/1920/500' },
+]);
+
+const productCategory = ref([
+  { id: 0, category: 'category1' },
+  { id: 1, category: 'category2' },
+  { id: 2, category: 'category3' },
+  { id: 3, category: 'category4' },
+  { id: 4, category: 'category5' },
+  { id: 5, category: 'category6' },
+  { id: 6, category: 'category7' },
+  { id: 7, category: 'category8' },
+  { id: 8, category: 'category9' },
+]);
+
+const productData = ref([
+  { id: 0, name: '品名1', content: '產品敘述產品敘述產品敘述產品敘述產品敘述產品敘述產品敘述產品敘述產品敘述產品敘述產品敘述產品敘述產品敘述產品敘述產品敘述產品敘述產品敘述產品敘述產品敘述', price: 870, img: 'https://picsum.photos/id/666/1920/500' },
+  { id: 1, name: '品名2', content: '產品敘述', price: 860, img: 'https://picsum.photos/id/667/1920/500' },
+  { id: 2, name: '品名3', content: '產品敘述', price: 850, img: 'https://picsum.photos/id/668/1920/500' },
+  { id: 3, name: '品名4', content: '產品敘述', price: 840, img: 'https://picsum.photos/id/669/1920/500' },
+  { id: 4, name: '品名5', content: '產品敘述', price: 830, img: 'https://picsum.photos/id/661/1920/500' },
+]);
+
 </script>
 
 <template>
@@ -20,63 +48,22 @@ const modules = [Autoplay, Pagination, Navigation];
 }" :pagination="{
   clickable: true,
 }" :navigation="true" :modules="modules" class="mySwiper">
-      <swiper-slide><img src="https://picsum.photos/id/242/1920/500" alt=""></swiper-slide>
-      <swiper-slide><img src="https://picsum.photos/id/238/1920/500" alt=""> </swiper-slide>
-      <swiper-slide> <img src="https://picsum.photos/id/239/1920/500" alt=""></swiper-slide>
-      <swiper-slide> <img src="https://picsum.photos/id/240/1920/500" alt=""></swiper-slide>
-      <swiper-slide> <img src="https://picsum.photos/id/241/1920/500" alt=""></swiper-slide>
+      <swiper-slide v-for="item in swiperImgs" :key="item.id">
+        <img :src="item.src" alt="">
+      </swiper-slide>
     </swiper>
     <div div class=" home-container">
       <div class="home-sort-list">
         <ul>
-          <li>
-            選項1
-            <DownArrow />
-          </li>
-          <li>
-            選項2
-            <DownArrow />
-          </li>
-          <li>
-            選項3
-            <DownArrow />
-          </li>
-          <li>
-            選項4
-            <DownArrow />
-          </li>
-          <li>
-            選項5
-            <DownArrow />
-          </li>
-          <li>
-            選項6
-            <DownArrow />
-          </li>
-          <li>
-            選項7
-            <DownArrow />
-          </li>
-          <li>
-            選項8
-            <DownArrow />
-          </li>
-          <li>
-            選項9
-            <DownArrow />
-          </li>
-          <li>
-            選項10
+          <li v-for="item in productCategory" :key="item.id">
+            {{ item.category }}
             <DownArrow />
           </li>
         </ul>
       </div>
       <div class="home-product-list">
-        <ProductCrad />
-        <ProductCrad />
-        <ProductCrad />
-        <ProductCrad />
-        <ProductCrad />
+        <ProductCrad v-for="item in productData" :key="item.id" :productName="item.name" :productContent="item.content"
+          :productPrice="item.price" :productImg="item.img" />
       </div>
     </div>
   </div>

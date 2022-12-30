@@ -1,16 +1,38 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, toRefs } from 'vue';
+
+const props = defineProps({
+    productName: {
+        type: String,
+        default: '',
+    },
+    productContent: {
+        type: String,
+        default: '',
+    },
+    productPrice: {
+        type: Number,
+        default: null,
+    },
+    productImg: {
+        type: String,
+        default: '',
+    }
+});
+
+const { productName, productContent, productPrice, productImg } = toRefs(props);
 
 </script>
 
 <template>
     <div class="crad">
         <div class="product-image">
-            <img src="https://picsum.photos/id/666/1920/500" alt="">
+            <img :src="productImg" alt="">
         </div>
         <div class="product-content">
-            <div>產品名稱測試字數測試字數測試字數測試字數測試字數測試字數</div>
-            <div class="product-price">NT890</div>
+            <div>{{ productName }}</div>
+            <div>{{ productContent }}</div>
+            <div class="product-price">NT$ {{ productPrice }}</div>
         </div>
     </div>
 </template>
@@ -34,7 +56,7 @@ import { ref } from 'vue';
 });
 
 .product-image {
-    height: 85%;
+    height: 75%;
 
     img {
         object-fit: cover;
@@ -50,11 +72,22 @@ import { ref } from 'vue';
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 1rem 5px 0;
+    padding: 1rem 5px .5rem;
     font-size: 0.875rem;
+    height: 25%;
+
+    & :nth-child(2) {
+        margin: 0.625rem 0;
+        height: 42px;
+        overflow: hidden;
+        display: -webkit-box;
+        /*限制行數 */
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        white-space: normal;
+    }
 
     .product-price {
-        margin-top: 0.5rem;
         font-weight: bolder;
     }
 }

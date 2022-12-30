@@ -62,6 +62,10 @@
             ul {
                 li {
                     line-height: 2rem;
+
+                    &:nth-child(1) {
+                        margin-top: 1.25rem;
+                    }
                 }
             }
         }

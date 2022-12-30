@@ -3,32 +3,51 @@ import ShoppingCart from '@/components/icons/ShoppingCart.vue';
 import BurgerMenu from '@/components/icons/BurgerMenu.vue';
 import Search from '@/components/icons/Search.vue';
 import Uesr from '@/components/icons/User.vue';
+import { ref } from 'vue';
 
+const showBurgerMenu = ref(false);
+const logo = ref('logo');
+const navbarMenu = ref([
+    { id: 0, name: '全部商品', url: '/' },
+    { id: 1, name: '最新消息', url: '/' },
+    { id: 2, name: '服務條款', url: '/' },
+    { id: 3, name: '會員中心', url: '/' },
+    { id: 4, name: '關於我們', url: '/about' },
+    { id: 5, name: '聯絡我們', url: '/' },
+    { id: 6, name: '退換貨及退款須知', url: '/' },
+]);
+
+const handleBurgerMenuShow = () => {
+    showBurgerMenu.value = !showBurgerMenu.value;
+};
 </script>
 
 <template>
     <div class="navbar">
         <div class="navbar-container">
             <div class="navbar-logo">
-                logo
+                {{ logo }}
             </div>
             <ul class="navbar-menu">
-                <li>分類001</li>
-                <li>分類002</li>
-                <li>分類003</li>
-                <li>分類004</li>
-                <li>分類005</li>
-                <li>分類006</li>
-                <li>分類007</li>
+                <li v-for="item in navbarMenu" :key="item.id">
+                    <router-link :to="item.url">
+                        {{ item.name }}
+                    </router-link>
+                </li>
             </ul>
             <div class="navbar-user">
                 <Search></Search>
                 <Uesr></Uesr>
                 <ShoppingCart></ShoppingCart>
-                <span class="burger-menu">
+                <span class="burger-menu" @click="handleBurgerMenuShow">
                     <BurgerMenu></BurgerMenu>
                 </span>
             </div>
+        </div>
+        <div class="close-burger-menu" :class="showBurgerMenu ? 'open-burger-menu' : ''">
+        </div>
+        <div :class="showBurgerMenu ? 'backdrop' : ''" @click="handleBurgerMenuShow">
+
         </div>
     </div>
 </template>
@@ -77,6 +96,11 @@ import Uesr from '@/components/icons/User.vue';
 li {
     margin: 0 0.625rem;
     line-height: 90px;
+
+    a {
+        color: var(--text-black);
+        text-decoration: none;
+    }
 }
 }
 
@@ -98,6 +122,33 @@ li {
 
 }
 }
+}
+
+.close-burger-menu {
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    width: 300px;
+    height: 100vh;
+    transform: translateX(-300px);
+    background-color: #888;
+    transition-duration: .3s
+}
+
+.open-burger-menu {
+    transform: translateX(0);
+}
+
+.backdrop {
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 9998;
 }
 }
 </style>
